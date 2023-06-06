@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config-gitlab
+  namespace: default
+  labels:
+    app: postgres-gitlab
+data:
+  POSTGRES_DB: postgresdbgitlab
+  POSTGRES_USER: admin
+  POSTGRES_PASSWORD: root

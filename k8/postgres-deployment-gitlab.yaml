@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-gitlab-deploy
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-gitlab
+  template:
+    metadata:
+      labels:
+        app: postgres-gitlab
+    spec:
+      containers:
+        - name: postgres-gitlab-container
+          image: postgres:10.1 
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5432  
+          envFrom:
+            - configMapRef:
+                name: postgres-config-gitlab
+         # volumeMounts:
+         #   - mountPath: /var/lib/postgresql/data
+          #    name: postgredb
+     # volumes:
+      #  - name: postgredb
+       #   persistentVolumeClaim:
+        #    claimName: postgresql-data-claim
+
+
